@@ -14,12 +14,12 @@ void tempCheck(){
     Serial.print("°C ");
   }
 
-  if (temp>=25){
+  if (temp>=15){
     Serial.println(" too hot!!!");
     blinkRed();
   }
 
-  if (temp<25 && temp>10){
+  if (temp<15 && temp>10){
     Serial.println(" just right!");
     defaultColor();
   }

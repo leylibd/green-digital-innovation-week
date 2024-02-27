@@ -1,9 +1,8 @@
 //-------libraries-------
 #include <DHT.h>
-#include <Servo.h>
 #include <FastLED.h>
 
-//-------lights-------
+//-------temperature lights-------
 #define light 5
 #define NUM_LEDS 72
 CRGB leds[NUM_LEDS];
@@ -19,16 +18,34 @@ DHT dht(DHTPIN, DHTTYPE);
 #define water_sensor A5 
 int water_level = 0; //storing the sensor value
 
+//------water indicator led strip--------
+#define water_leds_pin 13
+#define NUM_WATER_LEDS 10
+CRGB water_leds[NUM_WATER_LEDS];
+
+
+//--------moisture sensor-------------
+#define soilMoistureSensor A0
+int soilMoistureLevel;
+
+
 void setup() {
   Serial.begin(9600);
 
   //temp humi sensor
   dht.begin(); //initialising the sensor
 
-  //lights
+  //temperature lights
   FastLED.addLeds<WS2812B, light, GRB>(leds, NUM_LEDS);
-	FastLED.setBrightness(700);
+	FastLED.setBrightness(200);
 	FastLED.clear(true);
+
+  //water level
+  pinMode(water_power_pin, OUTPUT); //d7 pin becomes an output
+  digitalWrite(water_power_pin, LOW); //turning the pin(sensor) off
+
+  //water level indicator led strip
+  FastLED.addLeds<WS2812, water_leds_pin, GRB>(water_leds, NUM_WATER_LEDS);
 
 }
 
@@ -43,10 +60,48 @@ void loop() {
     //default
 
 
-  tempCheck();
-  humiCheck();
+  //tempCheck();
+  //humiCheck();
+  
   //testColor();
   //blinkRed();
 
+  //waterLevelCheck();
+
+  //waterMappinTest();
+
+  soilMoisture();
+
+  // water_leds[1] = CRGB(255, 255, 255);
+  // FastLED.show();
+  // delay(500);
+  // water_leds[2] = CRGB(255, 255, 255);
+  // FastLED.show();
+  // delay(500);
+  // water_leds[3] = CRGB(255, 255, 255);
+  // FastLED.show();
+  // delay(500);
+  // water_leds[4] = CRGB(255, 255, 255);
+  // FastLED.show();
+  // delay(500);
+  // water_leds[5] = CRGB(255, 255, 255);
+  // FastLED.show();
+  // delay(500);
+  // water_leds[6] = CRGB(255, 255, 255);
+  // FastLED.show();
+  // delay(500);
+  // water_leds[7] = CRGB(255, 255, 255);
+  // FastLED.show();
+  // delay(500);
+  // water_leds[8] = CRGB(255, 255, 255);
+  // FastLED.show();
+  // delay(500);
+  // water_leds[9] = CRGB(255, 255, 255);
+  // FastLED.show();
+  // delay(500);
+  // water_leds[10] = CRGB(255, 255, 255);
+  // FastLED.show();
+  // delay(500);
+ 
 }
 
