@@ -19,8 +19,8 @@ DHT dht(DHTPIN, DHTTYPE);
 int water_level = 0; //storing the sensor value
 
 //------water indicator led strip--------
-#define water_leds_pin 13
-#define NUM_WATER_LEDS 10
+#define water_leds_pin A3
+#define NUM_WATER_LEDS 22
 CRGB water_leds[NUM_WATER_LEDS];
 
 
@@ -37,7 +37,7 @@ void setup() {
 
   //temperature lights
   FastLED.addLeds<WS2812B, light, GRB>(leds, NUM_LEDS);
-	FastLED.setBrightness(200);
+	FastLED.setBrightness(255);
 	FastLED.clear(true);
 
   //water level
@@ -46,6 +46,7 @@ void setup() {
 
   //water level indicator led strip
   FastLED.addLeds<WS2812, water_leds_pin, GRB>(water_leds, NUM_WATER_LEDS);
+  //FastLED.setBrightness(100);
 
 }
 
@@ -60,7 +61,7 @@ void loop() {
     //default
 
 
-  //tempCheck();
+  tempCheck();
   //humiCheck();
   
   //testColor();
@@ -70,7 +71,7 @@ void loop() {
 
   //waterMappinTest();
 
-  soilMoisture();
+  //soilMoisture();
 
   // water_leds[1] = CRGB(255, 255, 255);
   // FastLED.show();

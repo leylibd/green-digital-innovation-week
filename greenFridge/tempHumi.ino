@@ -1,4 +1,5 @@
 void tempCheck(){
+  FastLED.setBrightness(100);
   delay(1000); //waiting few seconds between measurements
   //reading temp
   float temp = dht.readTemperature();
