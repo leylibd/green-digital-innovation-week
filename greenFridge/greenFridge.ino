@@ -61,7 +61,7 @@ void loop() {
     //default
 
 
-  tempCheck();
+  //tempCheck();
   //humiCheck();
   
   //testColor();
